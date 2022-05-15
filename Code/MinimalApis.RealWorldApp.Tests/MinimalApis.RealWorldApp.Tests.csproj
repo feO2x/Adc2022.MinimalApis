@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\MinimalApis.RealWorldApp\MinimalApis.RealWorldApp.csproj" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="FluentAssertions" Version="6.6.0" />
+        <PackageReference Include="Synnotech.Xunit" Version="1.1.0" />
+        <PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
+        <PackageReference Include="Serilog.Sinks.XUnit" Version="3.0.3" />
+        <PackageReference Include="Synnotech.MsSqlServer" Version="2.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="testsettings.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="testsettings.Development.json" Condition="Exists('testsettings.Development.json')">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+</Project>

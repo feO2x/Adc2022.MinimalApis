@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using System.Threading.Tasks;
+using LinqToDB.DataProvider.SqlServer;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 using Synnotech.Linq2Db.MsSqlServer;
 using Synnotech.Migrations.Linq2Db.Int64TimestampVersions;
 
@@ -6,7 +9,27 @@ namespace MinimalApis.RealWorldApp.DataAccess;
 
 public static class DataAccessModule
 {
-    public static IServiceCollection AddDataAccess(this IServiceCollection services) =>
-        services.AddLinq2DbForSqlServer()
-                .AddSynnotechMigrations();
+    public static IServiceCollection AddDataAccess(this IServiceCollection services,
+                                                   string configurationSectionName = Linq2DbSettings.DefaultSectionName) =>
+        services.AddLinq2DbForSqlServer(Mappings.CreateMappings,
+                                        configurationSectionName: configurationSectionName,
+                                        registerFactoryDelegateForDataConnection: false,
+                                        sqlServerProvider: SqlServerProvider.SystemDataSqlClient)
+                .AddSynnotechMigrations(typeof(DataAccessModule).Assembly);
+
+    public static async Task MigrateAndLogAsync(this MigrationEngine migrationEngine, ILogger logger)
+    {
+        var summary = await migrationEngine.MigrateAsync();
+
+        if (summary.TryGetAppliedMigrations(out var appliedMigrations))
+        {
+            logger.Information("The following migrations were applied:");
+            foreach (var appliedMigration in appliedMigrations)
+            {
+                logger.Information("{Migration}", appliedMigration.ToString());
+            }
+        }
+
+        summary.EnsureSuccess();
+    }
 }

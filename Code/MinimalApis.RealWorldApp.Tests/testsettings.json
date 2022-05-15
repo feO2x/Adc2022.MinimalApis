@@ -1,0 +1,6 @@
+{
+    "migrations": {
+        "areTestsEnabled": false,
+        "connectionString": "Server=(localdb)\\MsSqlLocalDB; Database=MinimalApisMigrationTests; Integrated Security=True"
+    }
+}

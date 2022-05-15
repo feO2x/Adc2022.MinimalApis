@@ -1,6 +1,7 @@
 CREATE TABLE Contacts (
     [Id] INT IDENTITY(1, 1) CONSTRAINT PK_Contacts PRIMARY KEY,
-    [Name] NVARCHAR(200) NOT NULL,
+    [FirstName] NVARCHAR(100) NOT NULL,
+    [LastName] NVARCHAR(100) NOT NULL,
     [Email] NVARCHAR(200) NOT NULL
 );
 
@@ -10,4 +11,11 @@ CREATE TABLE Addresses (
     [ZipCode] NVARCHAR(10) NOT NULL,
     [Location] NVARCHAR(100) NOT NULL,
     [ContactId] INT CONSTRAINT FK_Addresses_Contacts FOREIGN KEY REFERENCES Contacts(Id) NOT NULL
+);
+
+CREATE TABLE MigrationInfos (
+    [Id] INT IDENTITY(1, 1) CONSTRAINT PK_MigrationInfos PRIMARY KEY,
+    [Version] BIGINT CONSTRAINT UQ_MigrationInfos_Version UNIQUE NOT NULL,
+    [Name] NVARCHAR(100) NOT NULL,
+    [AppliedAt] DATETIME2 NOT NULL
 );
