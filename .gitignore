@@ -5,3 +5,6 @@ obj/
 .idea/
 *.user
 ~$*
+Logs/
+appsettings.*.json
+testsettings.*.json
