@@ -1,0 +1,13 @@
+CREATE TABLE Contacts (
+    [Id] INT IDENTITY(1, 1) CONSTRAINT PK_Contacts PRIMARY KEY,
+    [Name] NVARCHAR(200) NOT NULL,
+    [Email] NVARCHAR(200) NOT NULL
+);
+
+CREATE TABLE Addresses (
+    [Id] INT IDENTITY(1, 1) CONSTRAINT PK_Addresses PRIMARY KEY,
+    [Street] NVARCHAR(100) NOT NULL,
+    [ZipCode] NVARCHAR(10) NOT NULL,
+    [Location] NVARCHAR(100) NOT NULL,
+    [ContactId] INT CONSTRAINT FK_Addresses_Contacts FOREIGN KEY REFERENCES Contacts(Id) NOT NULL
+);
