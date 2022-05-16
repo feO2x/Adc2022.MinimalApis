@@ -21,6 +21,7 @@
         <PackageReference Include="Synnotech.Linq2Db.MsSqlServer" Version="6.0.0" />
         <PackageReference Include="Synnotech.Migrations.Linq2Db" Version="0.10.1" />
         <PackageReference Include="Synnotech.Migrations.Core.Analyzers" Version="0.10.0" PrivateAssets="all" />
+        <PackageReference Include="Synnotech.MsSqlServer" Version="2.0.0" />
         <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
         <PackageReference Include="Bogus" Version="34.0.2" />
     </ItemGroup>
@@ -29,6 +30,10 @@
         <EmbeddedResource Include="./DataAccess/Migrations/**/*.sql">
             <LogicalName>MinimalApis.RealWorldApp.DataAccess.Migrations.%(Filename)%(Extension)</LogicalName>
         </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Contacts\GetContacts\" />
     </ItemGroup>
 
 </Project>

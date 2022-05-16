@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using MinimalApis.RealWorldApp.DataAccess;
 using MinimalApis.RealWorldApp.Infrastructure;
 
 namespace MinimalApis.RealWorldApp;
@@ -16,6 +17,7 @@ public static class Program
                                     .ConfigureDependencyInjectionContainer()
                                     .Build()
                                     .ConfigureHttpPipeline();
+            await app.MigrateDatabaseAsync();
             await app.RunAsync();
             return 0;
         }
