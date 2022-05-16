@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using MinimalApis.RealWorldApp.Contacts.GetContactDetails;
 using MinimalApis.RealWorldApp.Contacts.GetContacts;
 using MinimalApis.RealWorldApp.Heartbeat;
 using Serilog;
@@ -18,15 +19,13 @@ public static class HttpPipeline
         app.UseSerilogRequestLogging();
         app.UseRouting();
         app.UseSwaggerAndSwaggerUi();
-        app.MapEndpoints();
-        return app;
+        return app.MapEndpoints();
     }
 
-    private static void MapEndpoints(this WebApplication app)
-    {
+    private static WebApplication MapEndpoints(this WebApplication app) =>
         app.MapHeartbeatEndpoint()
-           .MapGetContacts();
-    }
+           .MapGetContacts()
+           .MapGetContactDetails();
 
     private static void UseHttpsAndHstsIfNecessary(this WebApplication app)
     {
