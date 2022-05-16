@@ -20,7 +20,8 @@ public static class DependencyInjection
         services.AddSwagger()
                 .AddCoreServices()
                 .AddDataAccess()
-                .AddContactsModule();
+                .AddContactsModule()
+                .AddAutomaticEndpoints();
 
     private static IServiceCollection AddCoreServices(this IServiceCollection services) =>
         services.AddSingleton<IValidationContextFactory>(ValidationContextFactory.Instance);

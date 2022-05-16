@@ -25,7 +25,8 @@ public static class HttpPipeline
     private static WebApplication MapEndpoints(this WebApplication app) =>
         app.MapHeartbeatEndpoint()
            .MapGetContacts()
-           .MapGetContactDetails();
+           .MapGetContactDetails()
+           .AutomaticallyMapEndpoints();
 
     private static void UseHttpsAndHstsIfNecessary(this WebApplication app)
     {

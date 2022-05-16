@@ -1,7 +1,7 @@
 ﻿using Light.GuardClauses;
 using MinimalApis.RealWorldApp.DataAccess.Model;
 
-namespace MinimalApis.RealWorldApp.Contacts.GetContactDetails;
+namespace MinimalApis.RealWorldApp.Contacts;
 
 public readonly record struct ContactDetailDto(int Id,
                                                string FirstName,
@@ -14,7 +14,7 @@ public readonly record struct ContactDetailDto(int Id,
     public static ContactDetailDto FromContact(Contact contact)
     {
         var address = contact.Address.MustNotBeNull();
-        return new (contact.Id,
+        return new(contact.Id,
                     contact.FirstName,
                     contact.LastName,
                     contact.Email,
