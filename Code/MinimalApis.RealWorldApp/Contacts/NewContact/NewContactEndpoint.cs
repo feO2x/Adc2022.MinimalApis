@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using MinimalApis.RealWorldApp.DataAccess.Model;
 using MinimalApis.RealWorldApp.Infrastructure;
+using Serilog;
 using Synnotech.AspNetCore.MinimalApis.Responses;
 using Synnotech.DatabaseAbstractions;
 
@@ -12,14 +13,17 @@ namespace MinimalApis.RealWorldApp.Contacts.NewContact;
 public sealed class NewContactEndpoint : IMinimalApiEndpoint
 {
     public NewContactEndpoint(ISessionFactory<INewContactSession> sessionFactory,
-                              NewContactDtoValidator validator)
+                              NewContactDtoValidator validator,
+                              ILogger logger)
     {
         SessionFactory = sessionFactory;
         Validator = validator;
+        Logger = logger;
     }
 
     private ISessionFactory<INewContactSession> SessionFactory { get; }
     private NewContactDtoValidator Validator { get; }
+    private ILogger Logger { get; }
 
     public void MapEndpoint(WebApplication app) =>
         app.MapPost("/api/contacts/new", CreateContact)
@@ -42,10 +46,11 @@ public sealed class NewContactEndpoint : IMinimalApiEndpoint
         var contact = new Contact { FirstName = dto.FirstName, LastName = dto.LastName, Email = dto.Email };
 
         address.ContactId = contact.Id = await session.InsertContactAsync(contact);
-        await session.InsertAddressAsync(address);
+        address.Id = await session.InsertAddressAsync(address);
         await session.SaveChangesAsync();
 
         contact.Address = address;
+        Logger.Information("The new contact {@Contact} was created successfully", contact);
         return Response.Created("/api/contacts/" + contact.Id,
                                 ContactDetailDto.FromContact(contact));
     }

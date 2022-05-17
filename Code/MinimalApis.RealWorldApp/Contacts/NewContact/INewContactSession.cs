@@ -7,5 +7,5 @@ namespace MinimalApis.RealWorldApp.Contacts.NewContact;
 public interface INewContactSession : IAsyncSession
 {
     Task<int> InsertContactAsync(Contact contact);
-    Task InsertAddressAsync(Address address);
+    Task<int> InsertAddressAsync(Address address);
 }

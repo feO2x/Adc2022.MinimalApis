@@ -14,6 +14,6 @@ public sealed class LinqToDbNewContactSession : AsyncSession, INewContactSession
     public Task<int> InsertContactAsync(Contact contact) =>
         DataConnection.InsertWithInt32IdentityAsync(contact);
 
-    public Task InsertAddressAsync(Address address) =>
-        DataConnection.InsertAsync(address);
+    public Task<int> InsertAddressAsync(Address address) =>
+        DataConnection.InsertWithInt32IdentityAsync(address);
 }
