@@ -34,7 +34,7 @@
 
     <ItemGroup>
       <Folder Include="Contacts\GetContacts\" />
-      <Folder Include="Contacts\NewContact\" />
+      <Folder Include="Contacts\UpdateContact\" />
     </ItemGroup>
 
 </Project>

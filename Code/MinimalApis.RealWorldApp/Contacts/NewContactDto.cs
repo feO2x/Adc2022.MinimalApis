@@ -1,6 +1,6 @@
-﻿namespace MinimalApis.RealWorldApp.Contacts.NewContact;
+﻿namespace MinimalApis.RealWorldApp.Contacts;
 
-public sealed class NewContactDto
+public class NewContactDto
 {
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;

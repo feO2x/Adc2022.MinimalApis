@@ -3,6 +3,7 @@ using MinimalApis.RealWorldApp.Contacts.DeleteContact;
 using MinimalApis.RealWorldApp.Contacts.GetContactDetails;
 using MinimalApis.RealWorldApp.Contacts.GetContacts;
 using MinimalApis.RealWorldApp.Contacts.NewContact;
+using MinimalApis.RealWorldApp.Contacts.UpdateContact;
 
 namespace MinimalApis.RealWorldApp.Contacts;
 
@@ -12,5 +13,6 @@ public static class ContactsModule
         services.AddGetContacts()
                 .AddGetContactDetails()
                 .AddNewContact()
-                .AddDeleteContact();
+                .AddDeleteContact()
+                .AddUpdateContact();
 }

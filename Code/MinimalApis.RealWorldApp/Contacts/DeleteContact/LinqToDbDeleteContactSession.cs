@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using LinqToDB;
 using LinqToDB.Data;
+using MinimalApis.RealWorldApp.DataAccess;
 using MinimalApis.RealWorldApp.DataAccess.Model;
 using Synnotech.Linq2Db;
 
@@ -11,9 +12,7 @@ public sealed class LinqToDbDeleteContactSession : AsyncSession, IDeleteContactS
     public LinqToDbDeleteContactSession(DataConnection dataConnection) : base(dataConnection) { }
 
     public Task<Contact?> GetContactAsync(int id) =>
-        DataConnection.GetTable<Contact>()
-                      .LoadWith(c => c.Address)
-                      .FirstOrDefaultAsync(c => c.Id == id);
+        DataConnection.GetContactWithAddressAsync(id);
 
     public Task DeleteAddressAsync(Address address) => DataConnection.DeleteAsync(address);
 
