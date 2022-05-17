@@ -27,7 +27,12 @@ public sealed class NewContactEndpoint : IMinimalApiEndpoint
            .Produces<Dictionary<string, string>>(StatusCodes.Status400BadRequest)
            .Produces(StatusCodes.Status500InternalServerError);
 
-    public async Task<IResult> CreateContact(NewContactDto dto)
+    /// <summary>
+    /// Use this endpoint to create a new contact.
+    /// </summary>
+    /// <param name="dto">The DTO that describes all the properties of the new contact.</param>
+    /// <response code="400">Occurs when the DTO is null or when any of the properties is not set properly.</response>
+    public async Task<IResult> CreateContact(NewContactDto? dto)
     {
         if (Validator.CheckForErrors(dto, out var errors))
             return Response.BadRequest(errors);
