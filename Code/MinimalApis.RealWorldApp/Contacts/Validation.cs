@@ -2,7 +2,7 @@
 using Light.Validation;
 using Light.Validation.Checks;
 
-namespace MinimalApis.RealWorldApp.Contacts.GetContactDetails;
+namespace MinimalApis.RealWorldApp.Contacts;
 
 public static class Validation
 {
