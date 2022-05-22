@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
@@ -19,6 +19,7 @@
         <PackageReference Include="Xunit.SkippableFact" Version="1.4.13" />
         <PackageReference Include="Serilog.Sinks.XUnit" Version="3.0.3" />
         <PackageReference Include="Synnotech.MsSqlServer" Version="2.0.0" />
+        <PackageReference Include="Synnotech.DatabaseAbstractions.Mocks" Version="3.1.0" />
     </ItemGroup>
 
     <ItemGroup>
